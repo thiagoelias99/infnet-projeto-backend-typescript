@@ -1,6 +1,7 @@
-const Joi = require("joi");
+import Joi from "joi";
+import { ICourse } from "../../../../models/Course";
 
-const Course = Joi.object({
+const Course: Joi.ObjectSchema<ICourse> = Joi.object({
     uuid: Joi.string().guid({ version: "uuidv4" }),
     description: Joi.string().required(),
     courseHours: Joi.number().integer().required(),
@@ -15,4 +16,4 @@ const Course = Joi.object({
     ).default([])
 });
 
-module.exports = Course;
+export default Course;

@@ -1,12 +1,12 @@
 // @ts-nocheck
-const { ValidationError } = require("sequelize");
+import { ValidationError } from "sequelize";
 
-const { Student, Course } = require("../../../databases/sequelize/config");
-const { CryptServices } = require("../CryptServices");
-const { LoginError, IdError } = require("../../../errors");
-const { sign } = require("../JWTServices");
-const BaseDAO = require("./BaseDAO");
-const { EmailError } = require("../../../errors");
+import { Student, Course } from "../../../databases/sequelize/config";
+import { CryptServices } from "../CryptServices";
+import { LoginError, IdError } from "../../../errors";
+import { sign } from "../JWTServices";
+import BaseDAO from "./BaseDAO";
+import { EmailError } from "../../../errors";
 
 class StudentDAO extends BaseDAO {
     constructor() {
@@ -31,7 +31,6 @@ class StudentDAO extends BaseDAO {
     async updateRegister(student, uuid, transaction = {}) {
         try {
             student.password = await CryptServices.hashPassword(student.password);
-            // @ts-ignore
             student = await Student.update(student, { where: { uuid } }, transaction);
             if (!student.uuid) { throw new IdError; }
             return student;           
@@ -60,6 +59,7 @@ class StudentDAO extends BaseDAO {
     }
 
     async login(email, password) {
+        // eslint-disable-next-line no-useless-catch
         try {
             let jwt = "";
             if (email == "admin@email.com") {
@@ -73,10 +73,8 @@ class StudentDAO extends BaseDAO {
                 const student = await Student.scope("withPassword").findOne({ where: { email } });
 
                 if (!student) throw new LoginError();
-                // @ts-ignore
                 if (!await CryptServices.verifyPassword(password, student.password)) throw new LoginError();
 
-                // @ts-ignore
                 jwt = sign(student.uuid);
             }
 
@@ -94,4 +92,4 @@ class StudentDAO extends BaseDAO {
     }
 }
 
-module.exports = StudentDAO;
+export default StudentDAO;

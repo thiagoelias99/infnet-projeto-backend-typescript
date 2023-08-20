@@ -1,14 +1,16 @@
-// @ts-nocheck
-const jwt = require("jsonwebtoken");
+import * as jwt from "jsonwebtoken";
+import { JWTError } from "../../../errors";
 
-const { JWTError } = require("../../../errors");
+interface IJwtData {
+    uuid: string;
+}
 
-const sign = (data) => {
+const sign = (data: IJwtData) => {
     if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET not found in .env");
     return jwt.sign(data, process.env.JWT_SECRET);
 };
 
-const verify = (token) => {
+const verify = (token: string): string => {
     if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET not found in .env");
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
     if (typeof decodedData !== "string") {
@@ -17,7 +19,7 @@ const verify = (token) => {
     return decodedData;
 };
 
-module.exports = {
+export = {
     sign,
     verify,
 };

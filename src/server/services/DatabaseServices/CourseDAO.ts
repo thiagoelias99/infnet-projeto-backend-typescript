@@ -1,10 +1,10 @@
 // @ts-nocheck
-const moment = require("moment");
-const { Op } = require("sequelize");
+import moment from "moment";
+import { Op } from "sequelize";
 
-const { Student, Course } = require("../../../databases/sequelize/config");
-const BaseDAO = require("./BaseDAO");
-const { IdError } = require("../../../errors");
+import { Student, Course } from "../../../databases/sequelize/config";
+import BaseDAO from "./BaseDAO";
+import { IdError } from "../../../errors";
 
 class CourseDAO extends BaseDAO {
     constructor() {
@@ -104,4 +104,4 @@ class CourseDAO extends BaseDAO {
     }
 }
 
-module.exports = CourseDAO;
+export default CourseDAO;

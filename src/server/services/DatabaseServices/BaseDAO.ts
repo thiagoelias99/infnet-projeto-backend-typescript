@@ -1,9 +1,11 @@
 // @ts-nocheck
-const database = require("../../../databases/sequelize/config");
-const { IdError } = require("../../../errors");
+import database from "../../../databases/sequelize/config";
+import { IdError } from "../../../errors";
 
 class BaseDAO {
-    constructor(modelName) {
+    modelName: keyof typeof database;
+
+    constructor(modelName: keyof typeof database) {
         this.modelName = modelName;
     }
 
@@ -39,4 +41,4 @@ class BaseDAO {
     }
 }
 
-module.exports = BaseDAO;
+export default BaseDAO;

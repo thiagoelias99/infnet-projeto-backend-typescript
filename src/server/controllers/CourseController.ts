@@ -1,6 +1,6 @@
 // @ts-nocheck
-const { CourseDAO } = require("../services/DatabaseServices");
-const { StatusCodes } = require("http-status-codes");
+import CourseDAO from "../services/DatabaseServices/CourseDAO";
+import { StatusCodes } from "http-status-codes";
 
 const courseDAO = new CourseDAO();
 
@@ -94,4 +94,4 @@ class CourseController {
     }
 }
 
-module.exports = CourseController;
+export default CourseController;

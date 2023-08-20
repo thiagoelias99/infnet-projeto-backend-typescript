@@ -1,9 +1,10 @@
-const express = require("express");
+// @ts-nocheck
+import express from "express";
 const router = express.Router();
 
-const { RequestValidator, Authentication, AdminAuthentication } = require("../middlewares");
+import { RequestValidator, Authentication, AdminAuthentication } from "../middlewares";
 const path = "/students";
-const { StudentController } = require("../controllers");
+import { StudentController } from "../controllers";
 
 router.route("/login")
     .post(RequestValidator.body, StudentController.login);
@@ -21,4 +22,4 @@ router.route(`${path}/:uuid`)
     .put(RequestValidator.body, StudentController.put)
     .delete(StudentController.del);
 
-module.exports = router;
+export default router;

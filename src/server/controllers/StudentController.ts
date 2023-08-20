@@ -1,6 +1,6 @@
 // @ts-nocheck
-const { StudentDAO } = require("../services/DatabaseServices");
-const { StatusCodes } = require("http-status-codes");
+import StudentDAO from "../services/DatabaseServices/StudentDAO";
+import { StatusCodes } from "http-status-codes";
 
 const studentDAO = new StudentDAO();
 
@@ -47,7 +47,7 @@ class StudentController {
         try {
             const { studentUuid } = req.headers;
             if (studentUuid == "MyAdmin:D") {
-                res.status(StatusCodes.NOT_ACCEPTABLE).json({message: "Not allowed for admin"});
+                res.status(StatusCodes.NOT_ACCEPTABLE).json({ message: "Not allowed for admin" });
             } else {
                 const student = await studentDAO.getRegisterByUuid(studentUuid);
                 res.status(StatusCodes.OK).json(student);
@@ -76,4 +76,4 @@ class StudentController {
     }
 }
 
-module.exports = StudentController;
+export default StudentController;

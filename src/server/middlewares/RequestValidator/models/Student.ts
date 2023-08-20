@@ -1,8 +1,7 @@
-const Joi = require("joi");
+import Joi from "joi";
+import { IStudent } from "../../../../models/Student";
 
-const Course = require("./Course");
-
-const Student = Joi.object({
+const Student: Joi.ObjectSchema<IStudent> = Joi.object({
     uuid: Joi.string().guid({ version: "uuidv4" }),
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -17,4 +16,4 @@ const Student = Joi.object({
     ).default([])
 });
 
-module.exports = Student;
+export default Student;
