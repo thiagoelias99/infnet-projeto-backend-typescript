@@ -9,6 +9,10 @@ export interface IStudent {
     courses?: ICourseSimplified[]
 }
 
+export interface IStudentCreate{
+    
+}
+
 export interface IStudentSimplified {
     uuid: string,
     name: string

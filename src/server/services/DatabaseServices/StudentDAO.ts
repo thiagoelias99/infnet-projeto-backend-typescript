@@ -2,7 +2,7 @@
 import { ValidationError } from "sequelize";
 
 import { Student, Course } from "../../../databases/sequelize/config";
-import { CryptServices } from "../CryptServices";
+import CryptServices from "../CryptServices";
 import { LoginError, IdError } from "../../../errors";
 import { sign } from "../JWTServices";
 import BaseDAO from "./BaseDAO";
@@ -25,7 +25,6 @@ class StudentDAO extends BaseDAO {
                 throw error;
             }
         }
-
     }
 
     async updateRegister(student, uuid, transaction = {}) {

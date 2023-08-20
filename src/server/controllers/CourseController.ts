@@ -1,11 +1,11 @@
-// @ts-nocheck
+import { Request, Response, NextFunction } from "express";
 import CourseDAO from "../services/DatabaseServices/CourseDAO";
 import { StatusCodes } from "http-status-codes";
 
 const courseDAO = new CourseDAO();
 
 class CourseController {
-    static async post(req, res, next) {
+    static async post(req: Request, res: Response, next: NextFunction) {
         try {
             const course = await courseDAO.createRegister(req.body);
             res.status(StatusCodes.CREATED).json({ uuid: course.uuid });
@@ -14,7 +14,7 @@ class CourseController {
         }
     }
 
-    static async get(req, res, next) {
+    static async get(req: Request, res: Response, next: NextFunction) {
         try {
             const courses = await courseDAO.getAllRegisters();
             res.status(StatusCodes.OK).json(courses);
@@ -23,7 +23,7 @@ class CourseController {
         }
     }
 
-    static async getInfo(req, res, next) {
+    static async getInfo(req: Request, res: Response, next: NextFunction) {
         try {
             const courses = await courseDAO.getAllRegistersForStudent();
             res.status(StatusCodes.OK).json(courses);
@@ -32,7 +32,7 @@ class CourseController {
         }
     }
 
-    static async getByUuid(req, res, next) {
+    static async getByUuid(req: Request, res: Response, next: NextFunction) {
         try {
             const course = await courseDAO.getRegisterByUuid(req.params.uuid);
             res.status(StatusCodes.OK).json(course);
@@ -41,7 +41,7 @@ class CourseController {
         }
     }
 
-    static async del(req, res, next) {
+    static async del(req: Request, res: Response, next: NextFunction) {
         try {
             await courseDAO.deleteRegister(req.params.uuid);
             res.sendStatus(StatusCodes.OK);
@@ -50,7 +50,7 @@ class CourseController {
         }
     }
 
-    static async put(req, res, next) {
+    static async put(req: Request, res: Response, next: NextFunction) {
         try {
             await courseDAO.updateRegister(req.body, req.params.uuid);
             res.sendStatus(StatusCodes.OK);
@@ -59,7 +59,7 @@ class CourseController {
         }
     }
 
-    static async subscribe(req, res, next) {
+    static async subscribe(req: Request, res: Response, next: NextFunction) {
         try {
             const { studentUuid } = req.headers;
             const { uuid } = req.params;
@@ -76,7 +76,7 @@ class CourseController {
         }
     }
 
-    static async unsubscribe(req, res, next) {
+    static async unsubscribe(req: Request, res: Response, next: NextFunction) {
         try {
             const { studentUuid } = req.headers;
             const { uuid } = req.params;
@@ -94,4 +94,6 @@ class CourseController {
     }
 }
 
-export default CourseController;
+export {
+    CourseController
+};

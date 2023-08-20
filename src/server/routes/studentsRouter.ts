@@ -1,10 +1,9 @@
-// @ts-nocheck
 import express from "express";
 const router = express.Router();
 
 import { RequestValidator, Authentication, AdminAuthentication } from "../middlewares";
 const path = "/students";
-import { StudentController } from "../controllers";
+import { StudentController } from "../controllers/StudentController";
 
 router.route("/login")
     .post(RequestValidator.body, StudentController.login);

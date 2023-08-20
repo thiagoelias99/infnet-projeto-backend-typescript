@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-// import router from "./routes";
+import router from "./routes";
 import { errorHandler } from "./middlewares";
 
 const server = express();
@@ -17,7 +17,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 
 // Routing configuration
-// server.use(router);
+server.use(router);
 
 // Errors Handler middleware configuration
 server.use(errorHandler);

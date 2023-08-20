@@ -1,11 +1,16 @@
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/ban-types */
+import { Request, Response, NextFunction } from "express";
 import StudentDAO from "../services/DatabaseServices/StudentDAO";
 import { StatusCodes } from "http-status-codes";
+import { IStudent } from "../../models/Student";
+import { IParams } from "../models/IParams";
 
 const studentDAO = new StudentDAO();
 
+type RequestStudent = Request<IParams, unknown, IStudent, unknown>
+
 class StudentController {
-    static async post(req, res, next) {
+    static async post(req: Request<{}, {}, IStudent>, res: Response, next: NextFunction) {
         try {
             const student = await studentDAO.createRegister(req.body);
             res.status(StatusCodes.CREATED).json({ uuid: student.uuid });
@@ -14,7 +19,7 @@ class StudentController {
         }
     }
 
-    static async login(req, res, next) {
+    static async login(req: Request<{}, {}, IStudent>, res: Response, next: NextFunction) {
         const { email, password } = req.body;
         try {
             const message = await studentDAO.login(email, password);
@@ -25,7 +30,7 @@ class StudentController {
         }
     }
 
-    static async get(req, res, next) {
+    static async get(req: Request<{}, {}, IStudent>, res: Response, next: NextFunction) {
         try {
             const students = await studentDAO.getAllRegisters();
             res.status(StatusCodes.OK).json(students);
@@ -34,7 +39,7 @@ class StudentController {
         }
     }
 
-    static async getByUuid(req, res, next) {
+    static async getByUuid(req: RequestStudent, res: Response, next: NextFunction) {
         try {
             const student = await studentDAO.getRegisterByUuid(req.params.uuid);
             res.status(StatusCodes.OK).json(student);
@@ -43,7 +48,7 @@ class StudentController {
         }
     }
 
-    static async getInfo(req, res, next) {
+    static async getInfo(req: Request<{}, {}, IStudent>, res: Response, next: NextFunction) {
         try {
             const { studentUuid } = req.headers;
             if (studentUuid == "MyAdmin:D") {
@@ -57,7 +62,7 @@ class StudentController {
         }
     }
 
-    static async del(req, res, next) {
+    static async del(req: RequestStudent, res: Response, next: NextFunction) {
         try {
             await studentDAO.deleteRegister(req.params.uuid);
             res.sendStatus(StatusCodes.OK);
@@ -66,7 +71,7 @@ class StudentController {
         }
     }
 
-    static async put(req, res, next) {
+    static async put(req: RequestStudent, res: Response, next: NextFunction) {
         try {
             await studentDAO.updateRegister(req.body, req.params.uuid);
             res.sendStatus(StatusCodes.OK);
@@ -76,4 +81,6 @@ class StudentController {
     }
 }
 
-export default StudentController;
+export {
+    StudentController
+};

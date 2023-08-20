@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const { RequestValidator, Authentication, AdminAuthentication } = require("../middlewares");
-const { CourseController } = require("../controllers");
+import { RequestValidator, Authentication, AdminAuthentication } from "../middlewares";
+import { CourseController } from "../controllers/CourseController";
 
 const path = "/courses";
 
@@ -25,4 +25,4 @@ router.route(`${path}/:uuid/subscribe`)
 router.route(`${path}/:uuid/unsubscribe`)
     .patch(Authentication, RequestValidator.params, CourseController.unsubscribe);
 
-module.exports = router;
+export default router;
