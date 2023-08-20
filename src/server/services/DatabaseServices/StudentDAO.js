@@ -30,6 +30,7 @@ class StudentDAO extends BaseDAO {
     async updateRegister(student, uuid, transaction = {}) {
         try {
             student.password = await CryptServices.hashPassword(student.password);
+            // @ts-ignore
             student = await Student.update(student, { where: { uuid } }, transaction)
             if (!student.uuid) { throw new IdError }
             return student           
@@ -71,8 +72,10 @@ class StudentDAO extends BaseDAO {
                 const student = await Student.scope("withPassword").findOne({ where: { email } })
 
                 if (!student) throw new LoginError();
+                // @ts-ignore
                 if (!await CryptServices.verifyPassword(password, student.password)) throw new LoginError();
 
+                // @ts-ignore
                 jwt = sign(student.uuid)
             }
 

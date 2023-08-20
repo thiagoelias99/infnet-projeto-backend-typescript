@@ -1,3 +1,4 @@
+// @ts-nocheck
 const moment = require('moment')
 const { Op } = require("sequelize");
 

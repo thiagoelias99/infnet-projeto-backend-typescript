@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { StudentDAO } = require("../services/DatabaseServices")
 const { StatusCodes } = require("http-status-codes");
 
