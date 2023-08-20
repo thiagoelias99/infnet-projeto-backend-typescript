@@ -1,8 +1,9 @@
-// const { SqlError } = require("mariadb");
-const server = require("./server");
+import { syncWithDatabase } from "./databases/sequelize";
+import server from "./server";
 
 function startApp() {
     server;
+    syncWithDatabase();
 }
 
 try {

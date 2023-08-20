@@ -2,7 +2,9 @@
 import moment from "moment";
 import { Op } from "sequelize";
 
-import { Student, Course } from "../../../databases/sequelize/config";
+// import { Student, Course } from "../../../databases/sequelize/config";
+import { Student } from "../../../databases/sequelize/models/student.entity";
+import { Course } from "../../../databases/sequelize/models/course.entity";
 import BaseDAO from "./BaseDAO";
 import { IdError } from "../../../errors";
 
