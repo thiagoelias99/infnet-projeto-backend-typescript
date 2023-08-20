@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { ValidationError } = require('sequelize');
 
 const { Student, Course } = require('../../../databases/sequelize/config')

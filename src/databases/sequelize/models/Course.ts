@@ -1,14 +1,18 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Course extends Model {
-    static associate(models) {
-      Course.belongsToMany(models.Student, {
-        through: "StudentsCourses"
-      })
-    }
+import { InferAttributes, InferCreationAttributes, Model } from "sequelize";
+
+export = (sequelize, DataTypes) => {
+  class Course extends Model<InferAttributes<Course>, InferCreationAttributes<Course>> {
+    declare uuid: string;
+    declare description: string;
+    declare courseHours: string;
+    declare startDate: Date;
+    declare finishDate: Date
+
+    // static associate(models) {
+    //   Course.belongsToMany(models.Student, {
+    //     through: "StudentsCourses"
+    //   })
+    // }
   }
   Course.init(
     {

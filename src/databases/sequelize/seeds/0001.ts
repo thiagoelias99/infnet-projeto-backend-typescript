@@ -1,7 +1,10 @@
+import { ICourse } from "../../../models/Course";
+import { IStudent } from "../../../models/Student";
+
 const { fakerPT_BR } = require('@faker-js/faker');
 const faker = fakerPT_BR
 
-function createRandomUser() {
+function createRandomUser(): IStudent {
     const firstName = faker.person.firstName()
     const lastName = faker.person.lastName()
 
@@ -14,59 +17,59 @@ function createRandomUser() {
     };
 }
 
-async function runSeed(Student, Course) {
+export async function runSeed(Student, Course): Promise<void> {
     const countStudents = await Student.findAndCountAll()
     const countCourses = await Course.findAndCountAll()
     if (countCourses.count != 0 || countStudents.count != 0) { return }
 
     console.log("Running seeds");
-    const createdStudents = []
+    const createdStudents: IStudent[] = []
     for (let index = 0; index < 20; index++) {
         createdStudents.push(createRandomUser())
     }
 
-    const createdCourses = [
+    const createdCourses: ICourse[] = [
         {
             uuid: faker.string.uuid(),
             description: "Backend Nível 1",
             courseHours: 10,
-            startDate: "06/01/2023",
-            finishDate: "07/01/2023"
+            startDate: new Date("06/01/2023"),
+            finishDate: new Date("07/01/2023")
         },
         {
             uuid: faker.string.uuid(),
             description: "Backend Nível 2",
             courseHours: 12,
-            startDate: "07/01/2023",
-            finishDate: "08/01/2023"
+            startDate: new Date("07/01/2023"),
+            finishDate: new Date("08/01/2023")
         },
         {
             uuid: faker.string.uuid(),
             description: "Backend Nível 3",
             courseHours: 14,
-            startDate: "09/01/2023",
-            finishDate: "10/01/2023"
+            startDate: new Date("09/01/2023"),
+            finishDate: new Date("10/01/2023")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 1",
             courseHours: 12,
-            startDate: "07/01/2023",
-            finishDate: "08/01/2023"
+            startDate: new Date("07/01/2023"),
+            finishDate: new Date("08/01/2023")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 2",
             courseHours: 8,
-            startDate: "09/01/2023",
-            finishDate: "10/01/2023"
+            startDate: new Date("09/01/2023"),
+            finishDate: new Date("10/01/2023")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 3",
             courseHours: 16,
-            startDate: "10/01/2023",
-            finishDate: "11/01/2023"
+            startDate: new Date("10/01/2023"),
+            finishDate: new Date("11/01/2023")
         },
     ]
 
@@ -135,5 +138,3 @@ async function runSeed(Student, Course) {
             students[3]
         ])
 }
-
-module.exports = runSeed

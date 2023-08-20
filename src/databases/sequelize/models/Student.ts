@@ -1,12 +1,17 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Student extends Model {
-    static associate(models) {
-      Student.belongsToMany(models.Course, { through: "StudentsCourses" })
-    }
+import { InferAttributes, InferCreationAttributes, Model } from "sequelize";
+
+export = (sequelize, DataTypes) => {
+  class Student extends Model<InferAttributes<Student>, InferCreationAttributes<Student>> {
+    declare uuid: string;
+    declare name: string;
+    declare email: string;
+    declare password: string;
+    declare birthDate: Date
+
+
+    // static associate(models) {
+    //   Student.belongsToMany(models.Course, { through: "StudentsCourses" })
+    // }
   }
   Student.init(
     {
