@@ -1,7 +1,7 @@
-// @ts-nocheck
-import { InferAttributes, InferCreationAttributes, Model } from "sequelize";
+import { InferAttributes, InferCreationAttributes, Model, Sequelize  } from "sequelize";
 
-export = (sequelize, DataTypes) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export = (sequelize: Sequelize, DataTypes: any) => {
     class Student extends Model<InferAttributes<Student>, InferCreationAttributes<Student>> {
         declare uuid: string;
         declare name: string;

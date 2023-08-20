@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Sequelize } from "sequelize";
 import studentModel from "../models/Student";
 import courseModel from "../models/Course";
@@ -34,8 +33,6 @@ Course.belongsToMany(Student, {  through: "StudentsCourses"});
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-let conn;
-
 try {
     sequelize.sync({ force: false })
         .then(() => {
@@ -47,9 +44,6 @@ try {
 }
 catch (error) {
     console.log(error);
-}
-finally {
-    if (conn) conn.release();
 }
 
 export = db

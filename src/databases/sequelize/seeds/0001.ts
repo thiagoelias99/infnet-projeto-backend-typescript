@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ICourse } from "../../../models/Course";
 import { IStudent } from "../../../models/Student";
 import {fakerPT_BR} from "@faker-js/faker";
@@ -18,7 +17,8 @@ function createRandomUser(): IStudent {
     };
 }
 
-export async function runSeed(Student, Course): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function runSeed(Student: any, Course: any): Promise<void> {
     const countStudents = await Student.findAndCountAll();
     const countCourses = await Course.findAndCountAll();
     if (countCourses.count != 0 || countStudents.count != 0) { return; }
