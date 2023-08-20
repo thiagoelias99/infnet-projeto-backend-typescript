@@ -7,11 +7,6 @@ export = (sequelize, DataTypes) => {
         declare email: string;
         declare password: string;
         declare birthDate: Date;
-
-
-    // static associate(models) {
-    //   Student.belongsToMany(models.Course, { through: "StudentsCourses" })
-    // }
     }
     Student.init(
         {

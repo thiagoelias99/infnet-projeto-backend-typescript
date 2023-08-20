@@ -7,12 +7,6 @@ export = (sequelize, DataTypes) => {
         declare courseHours: string;
         declare startDate: Date;
         declare finishDate: Date;
-
-    // static associate(models) {
-    //   Course.belongsToMany(models.Student, {
-    //     through: "StudentsCourses"
-    //   })
-    // }
     }
     Course.init(
         {

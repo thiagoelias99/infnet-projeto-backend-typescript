@@ -1,7 +1,7 @@
 import { ICourse } from "../../../models/Course";
 import { IStudent } from "../../../models/Student";
+import {fakerPT_BR} from "@faker-js/faker";
 
-const { fakerPT_BR } = require("@faker-js/faker");
 const faker = fakerPT_BR;
 
 function createRandomUser(): IStudent {

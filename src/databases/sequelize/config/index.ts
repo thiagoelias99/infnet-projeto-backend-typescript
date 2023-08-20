@@ -1,16 +1,10 @@
-// const mariadb = require('mariadb');
 import { Sequelize } from "sequelize";
+import studentModel from "../models/Student";
+import courseModel from "../models/Course";
 import {runSeed as seed} from "../seeds/0001";
 import * as dotenv from "dotenv";
 import { Options, DataTypes } from "sequelize";
 dotenv.config();
-
-// import process
-// const Sequelize = require('sequelize');
-// const process = require('process');
-// const dotenv = require("dotenv");
-// const seed = require('../seeds/0001')
-
 
 const dbConfig: Options = {
     dialect: "sqlite",
@@ -23,10 +17,8 @@ const dbConfig: Options = {
 
 const sequelize: Sequelize = new Sequelize(dbConfig);
 
-const Student = require("../models/Student")(sequelize, DataTypes);
-// const Student = require("../models/Student")(sequelize, Sequelize.DataTypes);
-// const Course = require("../models/Course")(sequelize, Sequelize.DataTypes);
-const Course = require("../models/Course")(sequelize, DataTypes);
+const Student = studentModel(sequelize, DataTypes);
+const Course = courseModel(sequelize, DataTypes);
 
 const db = {
     Student,
@@ -35,12 +27,6 @@ const db = {
     Sequelize
 };
 
-//Run associations
-// Object.keys(db).forEach(modelName => {
-//   if (db[modelName].associate) {
-//     db[modelName].associate(db);
-//   }
-// });
 Student.belongsToMany(Course, { through: "StudentsCourses" });
 Course.belongsToMany(Student, {  through: "StudentsCourses"});
 
@@ -51,7 +37,7 @@ let conn;
 
 try {
     sequelize.sync({ force: false })
-        .then(_ => {
+        .then(() => {
             console.log(`Database ${dbConfig.database} connection Ok :D`);
             if (process.env.RUN_SEED) {
                 seed(Student, Course);
