@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: API de Exemplo
+  description: Exemplo de utilização do Swagger
+  version: 0.0.1
+  termsOfService: http://www.google.com
+  contact:
+    name: Thiago Elias
+    email: thiagoelias99@gmail.com
+    url: https://www.linkedin.com/in/eng-thiagoelias/
+  license:
+    name: 'License: GPLv3'
+    url: https://www.gnu.org/licenses/quick-guide-gplv3.pt-br.html
+externalDocs:
+  description: Documentação formal
+  url: http://www.google.com
+servers:
+  - url: http://localhost:3333
+paths:
+  /students:
+    get:
+      summary: Retorna todos os estudantes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    birthDate:
+                      type: string
+    post:
+      summary: Create a Student
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Thiago Elias
+                email:
+                  type: string
+                  example: "thiago@email.com"
+                password:
+                  type: string
+                  example: "123456"
+                birthDate:
+                  type: string
+                  example: "09/15/2000"
+
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid: 
+                    type: string
+                    example: "c4bbe6a8-5827-4c45-8269-cb5ff3670eac"
+                  
+  /students/{uuid}:
+    parameters:
+      - name: uuid
+        in: path
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Retorna estudante
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  birthDate:
+                    type: string
+                    format: date
+                  Courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        description:
+                          type: string
+                        courseHours:
+                          type: number
+                        startDate:
+                          type: string
+                        finishDate:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Authorization not found in request header
+      security: 
+        - auth: []
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+                    uuid:
+                      type: string
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    birthDate:
+                      type: string
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
