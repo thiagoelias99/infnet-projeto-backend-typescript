@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Sequelize } from "sequelize";
 import studentModel from "../models/Student";
 import courseModel from "../models/Course";

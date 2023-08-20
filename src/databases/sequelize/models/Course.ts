@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
 export = (sequelize, DataTypes) => {

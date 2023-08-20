@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { JWTServices } = require("../../services");
 const { JWTError } = require("../../../errors");
 

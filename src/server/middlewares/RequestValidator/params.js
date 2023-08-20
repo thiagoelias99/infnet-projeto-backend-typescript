@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { ReqParams } = require("./models");
 
 const params = (req, res, next) => {

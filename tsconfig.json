@@ -4,7 +4,7 @@
       "rootDir": "./src",
       "outDir": "./build",
       "noEmitOnError": true,
-      "noImplicitAny": false,
+      "noImplicitAny": true,
       "removeComments": true,
       "skipLibCheck": true,
       "strict": true,

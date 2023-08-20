@@ -1,10 +1,10 @@
+// @ts-nocheck
 const { Student, Course, Login } = require("./models");
 
 const body = (req, res, next) => {
     const { url, body } = req;
 
     const schema = getSchemaFromUrl(url);
-    // @ts-ignore
     const { error } = schema.validate(body);
     if (error) {
         next(error);

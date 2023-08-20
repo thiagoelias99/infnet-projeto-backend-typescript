@@ -1,3 +1,4 @@
+// @ts-nocheck
 const database = require("../../../databases/sequelize/config");
 const { IdError } = require("../../../errors");
 

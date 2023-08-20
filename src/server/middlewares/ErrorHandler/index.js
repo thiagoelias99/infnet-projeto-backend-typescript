@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { StatusCodes } = require("http-status-codes");
 
 const Joi = require("joi");

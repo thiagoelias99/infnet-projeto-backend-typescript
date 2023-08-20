@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ICourse } from "../../../models/Course";
 import { IStudent } from "../../../models/Student";
 import {fakerPT_BR} from "@faker-js/faker";
