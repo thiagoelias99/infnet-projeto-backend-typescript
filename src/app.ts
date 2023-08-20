@@ -2,12 +2,12 @@
 const server = require("./server");
 
 function startApp() {
-    server
+    server;
 }
 
 try {
     startApp();
 } catch (error) {
-    console.log("Server execution failed :(")
+    console.log("Server execution failed :(");
     console.log(error);
 }

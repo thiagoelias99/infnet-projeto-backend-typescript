@@ -1,5 +1,5 @@
 // @ts-nocheck
-const { StudentDAO } = require("../services/DatabaseServices")
+const { StudentDAO } = require("../services/DatabaseServices");
 const { StatusCodes } = require("http-status-codes");
 
 const studentDAO = new StudentDAO();
@@ -12,7 +12,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async login(req, res, next) {
         const { email, password } = req.body;
@@ -23,7 +23,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async get(req, res, next) {
         try {
@@ -32,7 +32,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async getByUuid(req, res, next) {
         try {
@@ -41,13 +41,13 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async getInfo(req, res, next) {
         try {
-            const { studentUuid } = req.headers
+            const { studentUuid } = req.headers;
             if (studentUuid == "MyAdmin:D") {
-                res.status(StatusCodes.NOT_ACCEPTABLE).json({message: "Not allowed for admin"})
+                res.status(StatusCodes.NOT_ACCEPTABLE).json({message: "Not allowed for admin"});
             } else {
                 const student = await studentDAO.getRegisterByUuid(studentUuid);
                 res.status(StatusCodes.OK).json(student);
@@ -55,7 +55,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async del(req, res, next) {
         try {
@@ -64,7 +64,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async put(req, res, next) {
         try {
@@ -73,7 +73,7 @@ class StudentController {
         } catch (error) {
             next(error);
         }
-    };
-};
+    }
+}
 
 module.exports = StudentController;

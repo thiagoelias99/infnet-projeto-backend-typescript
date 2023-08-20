@@ -1,7 +1,7 @@
 const { Student, Course, Login } = require("./models");
 
 const body = (req, res, next) => {
-    const { url, body } = req
+    const { url, body } = req;
 
     const schema = getSchemaFromUrl(url);
     // @ts-ignore
@@ -13,9 +13,9 @@ const body = (req, res, next) => {
 };
 
 function getSchemaFromUrl(url) {
-    if (url.startsWith("/students")) { return Student };
-    if (url.startsWith("/courses")) { return Course };
-    if (url.startsWith("/login")) { return Login };
-};
+    if (url.startsWith("/students")) { return Student; }
+    if (url.startsWith("/courses")) { return Course; }
+    if (url.startsWith("/login")) { return Login; }
+}
 
 module.exports = body;

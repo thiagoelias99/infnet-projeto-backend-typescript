@@ -1,28 +1,28 @@
 // @ts-nocheck
-const { ValidationError } = require('sequelize');
+const { ValidationError } = require("sequelize");
 
-const { Student, Course } = require('../../../databases/sequelize/config')
-const { CryptServices } = require("../CryptServices")
-const { LoginError, IdError } = require("../../../errors")
-const { sign } = require("../JWTServices")
-const BaseDAO = require('./BaseDAO');
-const { EmailError } = require('../../../errors')
+const { Student, Course } = require("../../../databases/sequelize/config");
+const { CryptServices } = require("../CryptServices");
+const { LoginError, IdError } = require("../../../errors");
+const { sign } = require("../JWTServices");
+const BaseDAO = require("./BaseDAO");
+const { EmailError } = require("../../../errors");
 
 class StudentDAO extends BaseDAO {
     constructor() {
-        super('Student')
+        super("Student");
     }
 
     async createRegister(student) {
         try {
             student.password = await CryptServices.hashPassword(student.password);
-            const studentDb = await Student.create(student)
-            return studentDb
+            const studentDb = await Student.create(student);
+            return studentDb;
         } catch (error) {
             if (error instanceof ValidationError) {
-                throw new EmailError()
+                throw new EmailError();
             } else {
-                throw error
+                throw error;
             }
         }
 
@@ -32,17 +32,17 @@ class StudentDAO extends BaseDAO {
         try {
             student.password = await CryptServices.hashPassword(student.password);
             // @ts-ignore
-            student = await Student.update(student, { where: { uuid } }, transaction)
-            if (!student.uuid) { throw new IdError }
-            return student           
+            student = await Student.update(student, { where: { uuid } }, transaction);
+            if (!student.uuid) { throw new IdError; }
+            return student;           
         } catch (error) {
             if (error instanceof ValidationError) {
-                throw new EmailError()
+                throw new EmailError();
             } else {
-                throw error
+                throw error;
             }
         }
-      }
+    }
 
     async getRegisterByUuid(uuid) {
         
@@ -53,31 +53,31 @@ class StudentDAO extends BaseDAO {
                     through: { attributes: [] }
                 }
             ],
-        })
-        if (!student) { throw new IdError }
-        return student
+        });
+        if (!student) { throw new IdError; }
+        return student;
 
     }
 
     async login(email, password) {
         try {
-            let jwt = ""
+            let jwt = "";
             if (email == "admin@email.com") {
                 if (password == "Admin123") {
-                    jwt = sign("MyAdmin:D")
+                    jwt = sign("MyAdmin:D");
                 } else {
-                    throw new LoginError()
+                    throw new LoginError();
                 }
                 
             } else {
-                const student = await Student.scope("withPassword").findOne({ where: { email } })
+                const student = await Student.scope("withPassword").findOne({ where: { email } });
 
                 if (!student) throw new LoginError();
                 // @ts-ignore
                 if (!await CryptServices.verifyPassword(password, student.password)) throw new LoginError();
 
                 // @ts-ignore
-                jwt = sign(student.uuid)
+                jwt = sign(student.uuid);
             }
 
             return (
@@ -89,9 +89,9 @@ class StudentDAO extends BaseDAO {
             );
 
         } catch (error) {
-            throw error
-        };
-    };
-};
+            throw error;
+        }
+    }
+}
 
-module.exports = StudentDAO
+module.exports = StudentDAO;

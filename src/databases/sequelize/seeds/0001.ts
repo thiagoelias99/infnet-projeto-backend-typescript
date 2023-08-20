@@ -1,12 +1,12 @@
 import { ICourse } from "../../../models/Course";
 import { IStudent } from "../../../models/Student";
 
-const { fakerPT_BR } = require('@faker-js/faker');
-const faker = fakerPT_BR
+const { fakerPT_BR } = require("@faker-js/faker");
+const faker = fakerPT_BR;
 
 function createRandomUser(): IStudent {
-    const firstName = faker.person.firstName()
-    const lastName = faker.person.lastName()
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
 
     return {
         uuid: faker.string.uuid(),
@@ -18,14 +18,14 @@ function createRandomUser(): IStudent {
 }
 
 export async function runSeed(Student, Course): Promise<void> {
-    const countStudents = await Student.findAndCountAll()
-    const countCourses = await Course.findAndCountAll()
-    if (countCourses.count != 0 || countStudents.count != 0) { return }
+    const countStudents = await Student.findAndCountAll();
+    const countCourses = await Course.findAndCountAll();
+    if (countCourses.count != 0 || countStudents.count != 0) { return; }
 
     console.log("Running seeds");
-    const createdStudents: IStudent[] = []
+    const createdStudents: IStudent[] = [];
     for (let index = 0; index < 20; index++) {
-        createdStudents.push(createRandomUser())
+        createdStudents.push(createRandomUser());
     }
 
     const createdCourses: ICourse[] = [
@@ -71,7 +71,7 @@ export async function runSeed(Student, Course): Promise<void> {
             startDate: new Date("10/01/2023"),
             finishDate: new Date("11/01/2023")
         },
-    ]
+    ];
 
     const students = await Student.bulkCreate(createdStudents);
     const courses = await Course.bulkCreate(createdCourses);
@@ -88,7 +88,7 @@ export async function runSeed(Student, Course): Promise<void> {
         students[15],
         students[10],
         students[9]
-    ])
+    ]);
     await courses[1].addStudents([
         students[0],
         students[2],
@@ -98,13 +98,13 @@ export async function runSeed(Student, Course): Promise<void> {
         students[12],
         students[3],
         students[4]
-    ])
+    ]);
     await courses[2].addStudents([
         students[0],
         students[2],
         students[5],
         students[7]
-    ])
+    ]);
     await courses[3].addStudents([
         students[17],
         students[16],
@@ -120,21 +120,21 @@ export async function runSeed(Student, Course): Promise<void> {
         students[10],
         students[11]
     ]),
-        await courses[4].addStudents([
-            students[17],
-            students[16],
-            students[1],
-            students[2],
-            students[3],
-            students[15],
-            students[14],
-            students[13]
-        ]),
-        await courses[5].addStudents([
-            students[17],
-            students[16],
-            students[1],
-            students[2],
-            students[3]
-        ])
+    await courses[4].addStudents([
+        students[17],
+        students[16],
+        students[1],
+        students[2],
+        students[3],
+        students[15],
+        students[14],
+        students[13]
+    ]),
+    await courses[5].addStudents([
+        students[17],
+        students[16],
+        students[1],
+        students[2],
+        students[3]
+    ]);
 }

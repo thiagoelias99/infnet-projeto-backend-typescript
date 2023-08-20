@@ -4,4 +4,4 @@ const CourseDAO = require("./CourseDAO");
 module.exports = {
     StudentDAO,
     CourseDAO
-}
+};

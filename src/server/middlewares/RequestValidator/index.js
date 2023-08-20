@@ -1,5 +1,5 @@
-const body = require("./body")
-const params = require("./params")
+const body = require("./body");
+const params = require("./params");
 
 module.exports = {
     body,

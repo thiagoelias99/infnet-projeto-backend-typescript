@@ -1,4 +1,4 @@
-const { CourseDAO } = require("../services/DatabaseServices")
+const { CourseDAO } = require("../services/DatabaseServices");
 const { StatusCodes } = require("http-status-codes");
 
 const courseDAO = new CourseDAO();
@@ -11,7 +11,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async get(req, res, next) {
         try {
@@ -20,7 +20,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async getInfo(req, res, next) {
         try {
@@ -29,7 +29,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async getByUuid(req, res, next) {
         try {
@@ -38,7 +38,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async del(req, res, next) {
         try {
@@ -47,7 +47,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async put(req, res, next) {
         try {
@@ -56,15 +56,15 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async subscribe(req, res, next) {
         try {
-            const { studentUuid } = req.headers
-            const { uuid } = req.params
+            const { studentUuid } = req.headers;
+            const { uuid } = req.params;
 
             if (studentUuid == "MyAdmin:D") {
-                res.status(StatusCodes.NOT_ACCEPTABLE).json({ message: "Not allowed for admin" })
+                res.status(StatusCodes.NOT_ACCEPTABLE).json({ message: "Not allowed for admin" });
             } else {
                 await courseDAO.subscribeStudent(studentUuid, uuid);
                 res.sendStatus(StatusCodes.OK);
@@ -73,15 +73,15 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     static async unsubscribe(req, res, next) {
         try {
-            const { studentUuid } = req.headers
-            const { uuid } = req.params
+            const { studentUuid } = req.headers;
+            const { uuid } = req.params;
 
             if (studentUuid == "MyAdmin:D") {
-                res.status(StatusCodes.NOT_ACCEPTABLE).json({ message: "Not allowed for admin" })
+                res.status(StatusCodes.NOT_ACCEPTABLE).json({ message: "Not allowed for admin" });
             } else {
                 await courseDAO.unsubscribeStudent(studentUuid, uuid);
                 res.sendStatus(StatusCodes.OK);
@@ -90,7 +90,7 @@ class CourseController {
         } catch (error) {
             next(error);
         }
-    };
-};
+    }
+}
 
 module.exports = CourseController;

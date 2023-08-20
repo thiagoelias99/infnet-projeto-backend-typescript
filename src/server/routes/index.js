@@ -1,9 +1,9 @@
 const express = require("express");
 
-const StudentsRouter = require("./studentsRouter")
-const CoursesRouter = require("./coursesRouter")
-const WelcomeRoute = require("./welcome")
-const Route404 = require("./404")
+const StudentsRouter = require("./studentsRouter");
+const CoursesRouter = require("./coursesRouter");
+const WelcomeRoute = require("./welcome");
+const Route404 = require("./404");
 
 const router = express.Router();
 

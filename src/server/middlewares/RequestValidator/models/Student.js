@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const Course = require("./Course")
+const Course = require("./Course");
 
 const Student = Joi.object({
     uuid: Joi.string().guid({ version: "uuidv4" }),

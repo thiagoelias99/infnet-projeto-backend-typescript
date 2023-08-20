@@ -4,14 +4,14 @@ const router = express.Router();
 const { RequestValidator, Authentication, AdminAuthentication } = require("../middlewares");
 const { CourseController } = require("../controllers");
 
-const path = "/courses"
+const path = "/courses";
 
 router.route(path)
     .post(AdminAuthentication, RequestValidator.body, CourseController.post)
     .get(AdminAuthentication, CourseController.get);
 
 router.route(`${path}/info`)
-    .get(Authentication, CourseController.getInfo)
+    .get(Authentication, CourseController.getInfo);
 
 router.route(`${path}/:uuid`)
     .all(RequestValidator.params)

@@ -1,8 +1,8 @@
 // @ts-nocheck
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
 //     });
 // });
 
-router.use('/', swaggerUi.serve);
-router.get('/', swaggerUi.setup(swaggerDocument))
+router.use("/", swaggerUi.serve);
+router.get("/", swaggerUi.setup(swaggerDocument));
 
 module.exports = router;

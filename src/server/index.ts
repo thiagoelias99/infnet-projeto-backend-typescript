@@ -1,11 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan")
-
-const router = require("./routes");
-const {
-    errorHandler
-} = require("./middlewares");
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import router from "./routes";
+import { errorHandler } from "./middlewares";
 
 const server = express();
 const port = 3333;
@@ -17,7 +14,7 @@ server.use(cors());
 server.use(express.json());
 
 // Log middleware configuration
-server.use(morgan('dev'));
+server.use(morgan("dev"));
 
 // Routing configuration
 server.use(router);

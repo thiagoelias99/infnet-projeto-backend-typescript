@@ -1,35 +1,35 @@
 // @ts-nocheck
-const moment = require('moment')
+const moment = require("moment");
 const { Op } = require("sequelize");
 
-const { Student, Course } = require('../../../databases/sequelize/config')
-const BaseDAO = require('./BaseDAO')
-const { IdError } = require('../../../errors')
+const { Student, Course } = require("../../../databases/sequelize/config");
+const BaseDAO = require("./BaseDAO");
+const { IdError } = require("../../../errors");
 
 class CourseDAO extends BaseDAO {
     constructor() {
-        super('Course')
+        super("Course");
     }
 
     async subscribeStudent(studentUuid, courseUuid) {
-        const student = await Student.findByPk(studentUuid)
-        const course = await Course.findByPk(courseUuid)
+        const student = await Student.findByPk(studentUuid);
+        const course = await Course.findByPk(courseUuid);
 
         if (student && course) {
-            course.addStudent(student)
+            course.addStudent(student);
         } else {
-            throw new IdError
+            throw new IdError;
         }
     }
 
     async unsubscribeStudent(studentUuid, courseUuid) {
-        const student = await Student.findByPk(studentUuid)
-        const course = await Course.findByPk(courseUuid)
+        const student = await Student.findByPk(studentUuid);
+        const course = await Course.findByPk(courseUuid);
 
         if (student && course) {
-            course.removeStudent(student)
+            course.removeStudent(student);
         } else {
-            throw new IdError
+            throw new IdError;
         }
     }
 
@@ -41,12 +41,12 @@ class CourseDAO extends BaseDAO {
                     through: { attributes: [] }
                 }
             ],
-        })
-        if (!course) { throw new IdError }
-        course.setDataValue("numberOfSubscribers", course.Students.length)
-        course.setDataValue("courseStatus", this.getCourseStatus(course))
+        });
+        if (!course) { throw new IdError; }
+        course.setDataValue("numberOfSubscribers", course.Students.length);
+        course.setDataValue("courseStatus", this.getCourseStatus(course));
 
-        return course
+        return course;
     }
 
     async getAllRegisters(where = {}) {
@@ -60,13 +60,13 @@ class CourseDAO extends BaseDAO {
                         through: { attributes: [] }
                     }
                 ],
-            })
+            });
         courses.forEach(course => {
-            course.setDataValue("numberOfSubscribers", course.Students.length)
-            course.setDataValue("courseStatus", this.getCourseStatus(course))
+            course.setDataValue("numberOfSubscribers", course.Students.length);
+            course.setDataValue("courseStatus", this.getCourseStatus(course));
         });
 
-        return courses
+        return courses;
     }
 
     async getAllRegistersForStudent(where = {}) {
@@ -84,24 +84,24 @@ class CourseDAO extends BaseDAO {
                         through: { attributes: [] }
                     }
                 ],
-            })
+            });
         courses.forEach(course => {
-            course.setDataValue("numberOfSubscribers", course.Students.length)
-            course.setDataValue("courseStatus", this.getCourseStatus(course))
+            course.setDataValue("numberOfSubscribers", course.Students.length);
+            course.setDataValue("courseStatus", this.getCourseStatus(course));
         });
 
-        return courses
+        return courses;
     }
 
     getCourseStatus(course) {
-        const today = moment()
-        const startDate = moment(course.startDate)
-        const finishDate = moment(course.finishDate)
+        const today = moment();
+        const startDate = moment(course.startDate);
+        const finishDate = moment(course.finishDate);
 
-        if (today.isBefore(startDate)) return "Open"
-        if (today.isAfter(finishDate)) return "Finished"
-        return "Started"
+        if (today.isBefore(startDate)) return "Open";
+        if (today.isAfter(finishDate)) return "Finished";
+        return "Started";
     }
 }
 
-module.exports = CourseDAO
+module.exports = CourseDAO;

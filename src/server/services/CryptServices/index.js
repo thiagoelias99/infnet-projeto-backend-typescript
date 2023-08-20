@@ -15,4 +15,4 @@ const verifyPassword = async (password, hashedPassword) => {
 module.exports.CryptServices = {
     hashPassword,
     verifyPassword,
-}
+};
