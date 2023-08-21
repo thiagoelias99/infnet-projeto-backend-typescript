@@ -5,14 +5,14 @@ interface IJwtData {
     uuid: string;
 }
 
+const SECRET = process.env.SECRET || "NOSECRET";
+
 const sign = (data: IJwtData) => {
-    if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET not found in .env");
-    return jwt.sign(data, process.env.JWT_SECRET);
+    return jwt.sign(data, SECRET);
 };
 
 const verify = (token: string): string => {
-    if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET not found in .env");
-    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedData = jwt.verify(token, SECRET);
     if (typeof decodedData !== "string") {
         throw new JWTError("Invalid Token");
     }

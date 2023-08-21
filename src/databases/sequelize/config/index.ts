@@ -4,9 +4,11 @@ import { Options } from "sequelize";
 
 dotenv.config();
 
+const DATABASE = process.env.DATABASE_NAME || "infnet_telias";
+
 const dbConfig: Options = {
     dialect: "sqlite",
-    storage: "./mydb.sqlite",
+    storage: `./${DATABASE}.sqlite`,
     define: {
         timestamps: true,
         underscored: true

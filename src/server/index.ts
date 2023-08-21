@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import chalk from "chalk";
 import router from "./routes";
 import { errorHandler } from "./middlewares";
 
@@ -27,10 +28,17 @@ server.use(router);
 // Errors Handler middleware configuration
 server.use(errorHandler);
 
-server.listen(port, () => {
-    const date = new Date();
-    console.log(`Node server started in ${date.toLocaleString()} at http://localhost:${port}`);
-    console.log(`Admin.Js started in ${date.toLocaleString()} at http://localhost:${port}${admin.options.rootPath}`);
+server.listen(port, () => {  
+    const log = console.log;
+    setTimeout(() => {
+        console.clear();
+        const date = new Date();
+        log(`Node server started in ${date.toLocaleString()} at ${chalk.blue(`http://localhost:${port}`)}`);
+        log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}`)}`);
+        log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
+        log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);
+        log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-typescript\n\n\n");
+    }, 5000);
 });
 
 export default server;
