@@ -38,7 +38,7 @@ server.listen(port, () => {
         log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
         log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);
         log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-typescript\n\n\n");
-    }, 5000);
+    }, 2000);
 });
 
 export default server;

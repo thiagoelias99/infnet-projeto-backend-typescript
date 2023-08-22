@@ -11,13 +11,13 @@ const DATABASE = process.env.DATABASE_NAME || "infnet_telias";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let sessionStore: any | null = null;
 
-setTimeout(() => {
-    sessionStore = new sqliteStore({
-        driver: sqlite3.Database,
-        path: `./${DATABASE}.sqlite`,
-        ttl: 3600000,
-    });
-}, 1000);
+// setTimeout(() => {
+sessionStore = new sqliteStore({
+    driver: sqlite3.Database,
+    path: `./${DATABASE}.sqlite`,
+    ttl: 3600000,
+});
+// }, 1000);
 
 export const sessionConfig = {
     store: sessionStore,

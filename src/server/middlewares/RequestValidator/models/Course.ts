@@ -4,7 +4,7 @@ import { ICourse } from "../../../../models/Course";
 const Course: Joi.ObjectSchema<ICourse> = Joi.object({
     uuid: Joi.string().guid({ version: "uuidv4" }),
     description: Joi.string().required(),
-    courseHours: Joi.number().integer().required(),
+    courseHours: Joi.number().integer().min(1).required(),
     startDate: Joi.date().required(),
     finishDate: Joi.date().required(),
     subscribersNumber: Joi.number().integer().default(0),

@@ -6,7 +6,10 @@ export interface IStudent {
     email: string,
     password: string,
     birthDate: Date,
-    courses?: ICourseSimplified[]
+    courses?: ICourseSimplified[],
+    createdAt?: Date,
+    updatedAt?: Date,
+    deletedAt?: Date
 }
 
 export interface IStudentCreate{

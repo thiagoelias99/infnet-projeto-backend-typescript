@@ -1,5 +1,4 @@
 import { DataTypes, Model, Optional } from "sequelize";
-// import { InferAttributes, InferCreationAttributes, Model, Sequelize  } from "sequelize";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { sequelize } from "../config";
@@ -50,5 +49,6 @@ Student.init(
         },
         scopes: {
             withPassword: { attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] } },
-        }
+        },
+        timestamps: true
     });

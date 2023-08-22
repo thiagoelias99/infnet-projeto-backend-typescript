@@ -1,5 +1,4 @@
 import { DataTypes, Model, Optional } from "sequelize";
-// import { InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 

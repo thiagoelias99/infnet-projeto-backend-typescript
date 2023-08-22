@@ -2,10 +2,10 @@ import AdminJS from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSSequelize from "@adminjs/sequelize";
 
-import { Student } from "../databases/sequelize/models/student.entity";
-import { Course } from "../databases/sequelize/models/course.entity";
 import { authenticationConfig } from "./authenticationConfig";
 import { sessionConfig } from "./sessionConfig";
+import studentConfig from "./studentConfig";
+import courseConfig from "./courseConfig";
 
 AdminJS.registerAdapter({
     Resource: AdminJSSequelize.Resource,
@@ -13,7 +13,7 @@ AdminJS.registerAdapter({
 });
 
 const adminOptions = {
-    resources: [Student, Course],
+    resources: [studentConfig, courseConfig],
 };
 
 const admin = new AdminJS(adminOptions);
