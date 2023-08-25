@@ -1,4 +1,4 @@
-import AdminJS from "adminjs";
+import AdminJS, {AdminJSOptions } from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSSequelize from "@adminjs/sequelize";
 
@@ -12,8 +12,13 @@ AdminJS.registerAdapter({
     Database: AdminJSSequelize.Database,
 });
 
-const adminOptions = {
+const adminOptions: AdminJSOptions = {
     resources: [studentConfig, courseConfig],
+    // rootPath: "/admin",
+    dashboard: {
+        component: AdminJS.bundle("./components/Dashboard.tsx"),
+        // component: componentLoader.add("Dashboard","./components/Dashboard.tsx"),
+    }
 };
 
 const admin = new AdminJS(adminOptions);
