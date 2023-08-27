@@ -14,10 +14,8 @@ AdminJS.registerAdapter({
 
 const adminOptions: AdminJSOptions = {
     resources: [studentConfig, courseConfig],
-    // rootPath: "/admin",
     dashboard: {
-        component: AdminJS.bundle("./components/Dashboard.tsx"),
-        // component: componentLoader.add("Dashboard","./components/Dashboard.tsx"),
+        component: AdminJS.bundle("./components/Dashboard.tsx")
     }
 };
 

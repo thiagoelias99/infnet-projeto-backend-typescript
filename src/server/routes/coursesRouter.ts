@@ -10,6 +10,9 @@ router.route(path)
     .post(AdminAuthentication, RequestValidator.body, CourseController.post)
     .get(AdminAuthentication, CourseController.get);
 
+router.route(`${path}/dashboard`)
+    .get(CourseController.get);
+
 router.route(`${path}/info`)
     .get(Authentication, CourseController.getInfo);
 
