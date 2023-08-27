@@ -1,4 +1,4 @@
-import AdminJS, {AdminJSOptions } from "adminjs";
+import AdminJS, { AdminJSOptions, LocaleTranslations } from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSSequelize from "@adminjs/sequelize";
 
@@ -16,6 +16,11 @@ const adminOptions: AdminJSOptions = {
     resources: [studentConfig, courseConfig],
     dashboard: {
         component: AdminJS.bundle("./components/Dashboard.tsx")
+    },
+    branding: {
+        favicon: "https://cdn-icons-png.flaticon.com/512/2000/2000887.png",
+        logo: "https://cdn-icons-png.flaticon.com/512/2000/2000887.png",
+        companyName: "ByteCraft School"
     }
 };
 
