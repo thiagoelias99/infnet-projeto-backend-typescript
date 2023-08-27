@@ -2,13 +2,15 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import chalk from "chalk";
+import * as dotenv from "dotenv";
 import router from "./routes";
 import { errorHandler } from "./middlewares";
 
 import { admin, adminRouter } from "../adminJs";
 
+dotenv.config();
 const server = express();
-const port = 3333;
+const port = process.env.PORT || 3333;
 
 // CORS middleware configuration
 server.use(cors());

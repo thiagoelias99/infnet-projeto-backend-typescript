@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API Infnet Projeto Backend Com Node + Express + Sql",
-    "description": "Api desenvolvida para o curso Backend com Node e SQL da InfNet",
+    "title": "API Infnet Projeto Backend TypeScript",
+    "description": "Api desenvolvida para o curso Backend com TypeScript da InfNet",
     "version": "0.0.1",
     "contact": {
       "name": "Thiago Elias",
@@ -12,7 +12,7 @@
   },
   "externalDocs": {
     "description": "Repositório do Projeto",
-    "url": "https://github.com/thiagoelias99/infnet-projeto-bck-node-sql"
+    "url": "https://github.com/thiagoelias99/infnet-projeto-backend-typescript"
   },
   "servers": [
     {
